@@ -1,10 +1,8 @@
 import easyCanvasLight
-reload( easyCanvasLight )
 from easyCanvasLight import *
 from datetime import datetime
 
 import Grid
-reload( Grid )
 from Grid import *
 
 canvas = EasyCanvas()
@@ -14,12 +12,13 @@ size(1000, 1000)
 _fontSize = 600
 cubeSize =40
 gap = 10
-
+useRandomFillColor = True
+useRandomStrokeColor = True
 
 Variable([
     dict(name="font", ui="Slider", args=dict( value=0, minValue=-20, maxValue=40) ),
     dict(name="cubeSize", ui="Slider", args=dict( value=30, minValue=1, maxValue=100) ),
- dict(name="shape", ui="Slider", args=dict( value=0, minValue=0, maxValue=2) ),
+    dict(name="shape", ui="Slider", args=dict( value=0, minValue=0, maxValue=2) ),
     dict(name="gap", ui="Slider", args=dict( value= 0, minValue= -2, maxValue= 100) ),
     dict(name="_fontSize", ui="Slider", args=dict( value=500, minValue=50, maxValue=500) ),
     dict(name="fillOpacity", ui="Slider", args=dict( value=1, minValue=0, maxValue=1) ),
@@ -31,14 +30,18 @@ Variable([
     dict(name="strokeColor", ui="ColorWell"),
     ], globals() )
 
-if useRandomFillColor:
-    fillColor = None
-if useRandomStrokeColor:
-    strokeColor = None
+fillColor = None
+strokeColor = None
 
 def draw(txt):
     canvas = EasyCanvas()
     path = BezierPath()
+    
+    if useRandomFillColor:
+        fillColor = None
+    
+    if useRandomStrokeColor:
+        strokeColor = None
     
     if int(shape) is 0:
         newshape = "circle"
@@ -57,7 +60,7 @@ def draw(txt):
                 gap = gap, 
                 box= path.bounds(), 
                 path = path)
-
+    print(fillColor)
     grid.go( 
                 fillColor=fillColor, 
                 strokeColor=strokeColor, 
