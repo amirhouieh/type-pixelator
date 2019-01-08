@@ -1,9 +1,7 @@
-import easyCanvasLight
 from easyCanvasLight import *
 from datetime import datetime
 
-import Grid
-from Grid import *
+from grid import *
 
 canvas = EasyCanvas()
 rndCol = canvas.randomColor()
